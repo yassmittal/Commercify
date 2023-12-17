@@ -1,11 +1,14 @@
 import "./App.css";
 import Header from "./components/header";
+import HeroSection from "./components/heroSection";
 
 function App() {
   return (
     <>
       <Header />
-      <div className="text-red-900">hi</div>
+      <div>
+        <HeroSection />
+      </div>
     </>
   );
 }
