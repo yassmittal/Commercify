@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RightArrow } from "./DynamicIcons";
+import { RightArrow } from "../DynamicIcons";
 
 export default function HeroSection() {
   const swiperImgUrls = [
@@ -47,3 +47,4 @@ export default function HeroSection() {
     </div>
   );
 }
+
