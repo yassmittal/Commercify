@@ -94,6 +94,7 @@ const ProfileIcon = () => (
   </svg>
 );
 
+// eslint-disable-next-line react/prop-types
 function RightArrow({classIcon}) {
   return (
     <svg
