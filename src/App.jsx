@@ -1,6 +1,8 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/HomePage";
 import Header from "./components/header";
+import ProductDetails from "./components/ProductDetail/productDetails";
 import { GoogleLogin } from "@react-oauth/google";
 
 
@@ -15,14 +17,14 @@ function App() {
   return (
     <>
       <div>
-        <h2>React Google Login</h2>
-        <br />
-        <br />
         <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
       </div>
 
       <Header />
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/ProductDetails/:id" component={ProductDetails} />
+      </Routes>
     </>
   );
 }
