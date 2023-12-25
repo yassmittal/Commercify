@@ -1,11 +1,10 @@
 // import { useState } from "react";
 import { useState } from "react";
 import { HeartFilledIcon, HeartOutlinedIcon } from "../DynamicIcons";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function TrendingProducts() {
-  const [favoirates, setFavoirates] = useState({});
-
-  const trendingProducts = [
+  const [trendingProducts, setTrendingProducts] = useState([
     {
       name: "Readme 12 pro",
       img: "Images/realme-c12-image.jpeg",
@@ -27,7 +26,6 @@ export default function TrendingProducts() {
       isFavoirate: false,
       id: 3,
     },
-
     {
       name: "product 4",
       img: "Images/realme-c12-image.jpeg",
@@ -35,10 +33,16 @@ export default function TrendingProducts() {
       isFavoirate: false,
       id: 4,
     },
-  ];
+  ]);
 
   function toggleFavoirate(id) {
-    product.isFavoirate ? setFavoirate(false) : setFavoirate(true);
+    const updatedTrendingProducts = [...trendingProducts];
+    const selectedProduct = updatedTrendingProducts.find((product) => {
+      return product.id === id;
+    });
+
+    selectedProduct.isFavoirate = selectedProduct.isFavoirate ? false : true;
+    setTrendingProducts(updatedTrendingProducts);
   }
 
   return (
@@ -56,6 +60,7 @@ export default function TrendingProducts() {
               isFavoirate={product.isFavoirate}
               key={product.id}
               iconClick={() => toggleFavoirate(product.id)}
+              id={product.id}
             />
           );
         })}
@@ -65,14 +70,23 @@ export default function TrendingProducts() {
 }
 
 // eslint-disable-next-line react/prop-types
-function SingleProduct({ name, img, price, isFavoirate, iconClick }) {
+function SingleProduct({ name, img, price, isFavoirate, iconClick, id }) {
+  const navigate = useNavigate();
   return (
-    <div className="shadow-md rounded-b-md cursor-pointer hover:shadow-lg hover:-translate-y-3 transition-all">
+    <div
+      className="shadow-md rounded-b-md cursor-pointer hover:shadow-lg hover:-translate-y-3 transition-all"
+      onClick={() => {
+        navigate(`/ProductDetails/${id}`);
+      }}
+    >
       <div className="bg-violet-200 rounded-t-md relative p-3">
         <img src={img} alt="" className="w-40 mx-auto h-full object-cover" />
         <button
           className="text-[#712689] absolute top-3 right-3"
-          onClick={iconClick}
+          onClick={(e) => {
+            e.stopPropagation();
+            iconClick();
+          }}
         >
           {isFavoirate ? <HeartFilledIcon /> : <HeartOutlinedIcon />}
         </button>

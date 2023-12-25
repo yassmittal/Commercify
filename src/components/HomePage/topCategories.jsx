@@ -1,4 +1,17 @@
+import { useEffect } from "react";
+
 export default function TopCategories() {
+
+  useEffect(() => {
+    // Fetch data from the API
+    fetch('https://fakestoreapi.com/products')
+      .then((response) => response.json())
+      .then((data) => {
+        // Update state with fetched products
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+  });
+
   let categoriesCardArray = [
     {
       imgUrl: "Icons/mensClothingIcon.svg",
