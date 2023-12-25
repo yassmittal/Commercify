@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-router-dom": "6"
