@@ -1,36 +1,26 @@
+import { useEffect, useState } from "react";
+
 export default function TopCategories() {
+  const [favouriteProducts, setFavouriteProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  let categoriesCardArray = [
-    {
-      imgUrl: "Icons/mensClothingIcon.svg",
-      categoryCardTitle: "Men's Clothing",
-      id: 1,
-    },
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          "https://fakestoreapi.com/products/categories"
+        );
+        const data = await response.json();
+        setFavouriteProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    {
-      imgUrl: "Icons/woman-clothes.png",
-      categoryCardTitle: "Women's Clothing",
-      id: 2,
-    },
-
-    {
-      imgUrl: "Icons/necklace-jewellery-icon.svg",
-      categoryCardTitle: "Jewellery",
-      id: 3,
-    },
-
-    {
-      imgUrl: "Icons/electronicsIcon.png",
-      categoryCardTitle: "Electronics",
-      id: 4,
-    },
-
-    {
-      imgUrl: "Icons/Accessories.png",
-      categoryCardTitle: "Accessories",
-      id: 5,
-    },
-  ];
+    fetchProducts();
+  }, []);
 
   return (
     <div className="p-4">
@@ -38,17 +28,21 @@ export default function TopCategories() {
         Top Categories
       </h2>
       <div className="px-4">
-        <div className="grid grid-cols-5 gap-4">
-          {categoriesCardArray.map((Card) => {
-            return (
-              // eslint-disable-next-line react/jsx-key
-              <CategoryCard
-                imgUrl={Card.imgUrl}
-                categoryCardTitle={Card.categoryCardTitle}
-                key={Card.id}
-              />
-            );
-          })}
+        <div className="grid grid-cols-4 gap-4">
+          {loading ? (
+            // Render skeleton loading placeholders while data is being fetched
+            <div className="">loading</div>
+          ) : (
+            // Render the actual product list once data is fetched
+            <>
+              {favouriteProducts.map((product) => {
+                return (
+                  // eslint-disable-next-line react/jsx-key
+                  <CategoryCard categoryCardTitle={product} />
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -56,10 +50,9 @@ export default function TopCategories() {
 }
 
 // eslint-disable-next-line react/prop-types
-function CategoryCard({ imgUrl, categoryCardTitle }) {
+function CategoryCard({ categoryCardTitle }) {
   return (
     <div className="border border-gray-300 rounded-lg py-5 px-4 text-center cursor-pointer hover:border-transparent hover:-translate-y-1 hover:shadow-md transition-all">
-      <img src={imgUrl} alt="" className="w-10 mx-auto mb-3" />
       <p>{categoryCardTitle}</p>
     </div>
   );
