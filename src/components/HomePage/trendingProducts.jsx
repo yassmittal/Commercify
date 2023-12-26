@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { HeartFilledIcon, HeartOutlinedIcon } from "../DynamicIcons";
 import {  useNavigate } from "react-router-dom";
-import "react-loading-skeleton/dist/skeleton.css";
 
 export default function TrendingProducts() {
   const [products, setProducts] = useState([]);
