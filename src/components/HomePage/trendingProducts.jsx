@@ -1,9 +1,12 @@
 // import { useState } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HeartFilledIcon, HeartOutlinedIcon } from "../DynamicIcons";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export default function TrendingProducts() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [trendingProducts, setTrendingProducts] = useState([
     {
       name: "Readme 12 pro",
@@ -35,6 +38,24 @@ export default function TrendingProducts() {
     },
   ]);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          "https://fakestoreapi.com/products?limit=4"
+        );
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   function toggleFavoirate(id) {
     const updatedTrendingProducts = [...trendingProducts];
     const selectedProduct = updatedTrendingProducts.find((product) => {
@@ -51,19 +72,32 @@ export default function TrendingProducts() {
         Trending Products
       </h2>
       <div className="grid grid-cols-4 gap-12">
-        {trendingProducts.map((product) => {
-          return (
-            <SingleProduct
-              name={product.name}
-              img={product.img}
-              price={product.price}
-              isFavoirate={product.isFavoirate}
-              key={product.id}
-              iconClick={() => toggleFavoirate(product.id)}
-              id={product.id}
-            />
-          );
-        })}
+        {loading ? (
+          // Render skeleton loading placeholders while data is being fetched
+          <ul>
+            <div>Loading</div>
+          </ul>
+        ) : (
+          // Render the actual product list once data is fetched
+          <>
+            {products.map((product) => {
+              return (
+                <SingleProduct
+                  name={product.title}
+                  img={product.image}
+                  price={product.price}
+                  isFavoirate={product.isFavoirate}
+                  key={product.id}
+                  iconClick={() => toggleFavoirate(product.id)}
+                  id={product.id}
+                />
+              );
+            })}
+          </>
+        )}
+      </div>
+      <div>
+        <h1>Product List</h1>
       </div>
     </div>
   );
@@ -79,7 +113,7 @@ function SingleProduct({ name, img, price, isFavoirate, iconClick, id }) {
         navigate(`/ProductDetails/${id}`);
       }}
     >
-      <div className="bg-violet-200 rounded-t-md relative p-3">
+      <div className="bg-violet-200 rounded-t-md relative p-3 h-52">
         <img src={img} alt="" className="w-40 mx-auto h-full object-cover" />
         <button
           className="text-[#712689] absolute top-3 right-3"
@@ -92,8 +126,10 @@ function SingleProduct({ name, img, price, isFavoirate, iconClick, id }) {
         </button>
       </div>
       <div className="bg-white px-3 py-2 flex justify-between items-center rounded-b-md">
-        <p className="font-semibold text-lg">{name}</p>
-        <p className="text-[#712689] font-semibold text-xl">Rs {price}</p>
+        <p className="font-semibold text-lg twoLinesOnly me-2">{name}</p>
+        <p className="text-[#712689] font-semibold text-xl whitespace-nowrap">
+          Rs {price}
+        </p>
       </div>
     </div>
   );

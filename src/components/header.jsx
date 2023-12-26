@@ -9,7 +9,6 @@ export default function Header() {
   const [isOpen, setisOpen] = useState(false);
 
   const responseMessage = (response) => {
-    setUser(response.Qt);
     const decodedToken = jwtDecode(response.credential);
 
     setUser({
