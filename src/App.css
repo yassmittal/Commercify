@@ -1,0 +1,9 @@
+.twoLinesOnly {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* add ellipsis */
+}
