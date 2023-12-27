@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { StarIcon } from "../DynamicIcons";
+import ProductDetailPlaceholder from "./productDetailPlaceholder";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export default function ProductDetails() {
   return (
     <>
       {loading ? (
-        <div>loading</div>
+        <ProductDetailPlaceholder />
       ) : (
         <div className="p-6">
           <div className="max-w-4xl mx-auto">
