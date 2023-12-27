@@ -72,7 +72,7 @@ export default function TrendingProducts() {
       <h2 className="text-4xl text-center font-semibold my-6">
         Trending Products
       </h2>
-      <div className="grid grid-cols-4 gap-12">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
         {loading ? (
           // Render skeleton loading placeholders while data is being fetched
           <TrendingProductsPlaceholder />

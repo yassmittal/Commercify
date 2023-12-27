@@ -30,7 +30,7 @@ export default function TopCategories() {
         Top Categories
       </h2>
       <div className="px-4">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {loading ? (
             // Render skeleton loading placeholders while data is being fetched
             <TopCategoriesPlaceholder />

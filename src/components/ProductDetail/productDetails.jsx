@@ -32,14 +32,14 @@ export default function ProductDetails() {
         <div className="p-6">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-6 gap-4">
-              <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-2">
+              <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 h-[400px]">
                 <img
                   src={product.image}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
-              <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-4 flex flex-col justify-between">
+              <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-4 flex flex-col justify-between">
                 <h2 className="text-2xl font-semibold">{product.title}</h2>
                 <p className="text-base font-medium mt-2">${product.price}</p>
                 <p className="leading-tight text-sm max-w-md mt-3">
