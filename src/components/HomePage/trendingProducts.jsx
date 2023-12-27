@@ -100,7 +100,7 @@ export default function TrendingProducts() {
 }
 
 // eslint-disable-next-line react/prop-types
-function SingleProduct({ name, img, price, isFavoirate, iconClick, id }) {
+export function SingleProduct({ name, img, price, isFavoirate, iconClick, id }) {
   const navigate = useNavigate();
   return (
     <div
