@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SingleProduct } from "../HomePage/trendingProducts";
+import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProductsPlaceholder";
 
 export default function Categories() {
   const { category } = useParams();
@@ -31,7 +32,7 @@ export default function Categories() {
     <div className="p-5">
       <div className="grid grid-cols-4 gap-12">
         {loading ? (
-          <div>loading</div>
+          <TrendingProductsPlaceholder />
         ) : (
           <>
             {products.map((product) => {
