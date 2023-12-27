@@ -38,7 +38,7 @@ export default function TopCategories() {
               {favouriteProducts.map((product) => {
                 return (
                   // eslint-disable-next-line react/jsx-key
-                  <CategoryCard categoryCardTitle={product} />
+                  <CategoryCard categoryCardTitle={product} id={product.id} />
                 );
               })}
             </>
@@ -50,10 +50,10 @@ export default function TopCategories() {
 }
 
 // eslint-disable-next-line react/prop-types
-function CategoryCard({ categoryCardTitle }) {
+function CategoryCard({ categoryCardTitle , id }) {
   return (
-    <div className="border border-gray-300 rounded-lg py-5 px-4 text-center cursor-pointer hover:border-transparent hover:-translate-y-1 hover:shadow-md transition-all">
+    <li key={id} className="border border-gray-300 rounded-lg py-5 px-4 text-center cursor-pointer hover:border-transparent hover:-translate-y-1 hover:shadow-md transition-all list-none">
       <p>{categoryCardTitle}</p>
-    </div>
+    </li>
   );
 }

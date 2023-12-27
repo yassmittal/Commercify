@@ -7,3 +7,7 @@
   text-overflow: ellipsis;
   /* add ellipsis */
 }
+
+button.selected{
+  border: 1px solid #712689;
+}
