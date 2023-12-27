@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { HeartFilledIcon, HeartOutlinedIcon } from "../DynamicIcons";
 import { useNavigate } from "react-router-dom";
+import TrendingProductsPlaceholder from "./Placeholders/trendingProductsPlaceholder";
 
 export default function TrendingProducts() {
   const [products, setProducts] = useState([]);
@@ -74,7 +75,7 @@ export default function TrendingProducts() {
       <div className="grid grid-cols-4 gap-12">
         {loading ? (
           // Render skeleton loading placeholders while data is being fetched
-          <div>Loading</div>
+          <TrendingProductsPlaceholder />
         ) : (
           // Render the actual product list once data is fetched
           <>
