@@ -1,43 +1,14 @@
+/* eslint-disable no-undef */
 // import { useState } from "react";
 import { useEffect, useState } from "react";
 import { HeartFilledIcon, HeartOutlinedIcon } from "../DynamicIcons";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import TrendingProductsPlaceholder from "./Placeholders/trendingProductsPlaceholder";
+import { useNavigate } from "react-router/dist";
 
 export default function TrendingProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const [trendingProducts, setTrendingProducts] = useState([
-    {
-      name: "Readme 12 pro",
-      img: "Images/realme-c12-image.jpeg",
-      price: 11999,
-      isFavoirate: true,
-      id: 1,
-    },
-    {
-      name: "product 2",
-      img: "Images/realme-c12-image.jpeg",
-      price: 11999,
-      isFavoirate: false,
-      id: 2,
-    },
-    {
-      name: "product 3",
-      img: "Images/realme-c12-image.jpeg",
-      price: 11999,
-      isFavoirate: false,
-      id: 3,
-    },
-    {
-      name: "product 4",
-      img: "Images/realme-c12-image.jpeg",
-      price: 11999,
-      isFavoirate: false,
-      id: 4,
-    },
-  ]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -106,7 +77,7 @@ export function SingleProduct({ name, img, price, isFavoirate, iconClick, id }) 
     <div
       className="shadow-md rounded-b-md cursor-pointer hover:shadow-lg hover:-translate-y-3 transition-all"
       onClick={() => {
-        navigate(`/ProductDetails/${id}`);
+        navigate(`/ProductDetail/${id}`);
       }}
     >
       <div className="bg-violet-200 rounded-t-md relative p-3 h-52">

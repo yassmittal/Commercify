@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TopCategoriesPlaceholder from "./Placeholders/topCategoriesPlaceholder";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router/dist";
+// import { useNavigate } from "react-router-dom";
 
 export default function TopCategories() {
   const [favouriteProducts, setFavouriteProducts] = useState([]);

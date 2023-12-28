@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { SingleProduct } from "../HomePage/trendingProducts";
 import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProductsPlaceholder";
+import { useParams } from "react-router/dist";
 
 export default function Categories() {
   const { category } = useParams();
