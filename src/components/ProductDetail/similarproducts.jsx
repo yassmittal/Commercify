@@ -43,7 +43,7 @@ export default function Similarproducts({ category, currentProductId }) {
                 name={product.title}
                 img={product.image}
                 price={product.price}
-                isFavoirate={product.isFavoirate}
+                // isFavoirate={product.isFavoirate}
                 key={product.id}
                 id={product.id}
               />

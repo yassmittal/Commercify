@@ -1,30 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { StarIcon } from "../DynamicIcons";
 import ProductDetailPlaceholder from "./productDetailPlaceholder";
 import Similarproducts from "./similarproducts";
 
-export default function ProductDetails() {
-  const { id } = useParams();
-  const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-        const data = await response.json();
-
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, []);
-
+export default function ProductDetails({productImg , title , price , description , loading}) {
   return (
     <>
       {loading ? (
@@ -36,16 +15,16 @@ export default function ProductDetails() {
               <div className="grid grid-cols-6 gap-4">
                 <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 h-[400px]">
                   <img
-                    src={product.image}
+                    src={productImg}
                     alt=""
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
                 <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-4 flex flex-col justify-between">
-                  <h2 className="text-2xl font-semibold">{product.title}</h2>
-                  <p className="text-base font-medium mt-2">${product.price}</p>
+                  <h2 className="text-2xl font-semibold">{title}</h2>
+                  <p className="text-base font-medium mt-2">${price}</p>
                   <p className="leading-tight text-sm max-w-md mt-3">
-                    {product.description}
+                    {description}
                   </p>
                   <div className="mt-4 flex items-center">
                     <p className="font-semibold flex items-center gap-2">
@@ -84,8 +63,6 @@ export default function ProductDetails() {
               </div>
             </div>
           </div>
-
-          <Similarproducts category={product.category} currentProductId={product.id}/>
         </>
       )}
     </>
