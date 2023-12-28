@@ -37,13 +37,12 @@ export default function TopCategories() {
           ) : (
             // Render the actual product list once data is fetched
             <>
-              {favouriteProducts.map((product) => {
+              {favouriteProducts.map((product , index) => {
                 return (
                   // eslint-disable-next-line react/jsx-key
                   <CategoryCard
                     categoryCardTitle={product}
-                    id={product.id}
-                    key={product.id}
+                    key={index}
                   />
                 );
               })}
@@ -56,11 +55,10 @@ export default function TopCategories() {
 }
 
 // eslint-disable-next-line react/prop-types
-function CategoryCard({ categoryCardTitle, id }) {
+function CategoryCard({ categoryCardTitle }) {
   const navigate = useNavigate();
   return (
     <li
-      key={id}
       className="border border-gray-300 rounded-lg py-5 px-4 text-center cursor-pointer hover:border-transparent hover:-translate-y-1 hover:shadow-md transition-all list-none"
       onClick={() => {
         navigate(`/${categoryCardTitle}`);
