@@ -32,7 +32,7 @@ export default function Similarproducts({ category, currentProductId }) {
   console.log(similarProducts);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto" >
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4" >
       {loading ? (
         <TrendingProductsPlaceholder />
       ) : (
