@@ -33,7 +33,7 @@ export default function ProductDetail() {
       {loading ? (
         <div>
           <ProductDetailPlaceholder />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4">
             <TrendingProductsPlaceholder />
           </div>
         </div>
