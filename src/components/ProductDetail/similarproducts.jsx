@@ -29,8 +29,6 @@ export default function Similarproducts({ category, currentProductId }) {
     return product.id != currentProductId;
   });
 
-  console.log(similarProducts);
-
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4" >
       {loading ? (

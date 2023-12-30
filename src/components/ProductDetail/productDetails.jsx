@@ -1,9 +1,17 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { StarIcon } from "../DynamicIcons";
 import ProductDetailPlaceholder from "./productDetailPlaceholder";
 import Similarproducts from "./similarproducts";
 
-export default function ProductDetails({productImg , title , price , description , loading}) {
+export default function ProductDetails({
+  productImg,
+  title,
+  price,
+  description,
+  loading,
+  addToCart,
+}) {
   return (
     <>
       {loading ? (
@@ -55,7 +63,10 @@ export default function ProductDetails({productImg , title , price , description
                     <button className="bg-[#712689] hover:bg-[rgb(134,38,137)] rounded-md px-3 py-2 text-white font-semibold">
                       Buy Now
                     </button>
-                    <button className="bg-white border border-gray-400 hover:bg-gray-200 rounded-md px-3 py-2">
+                    <button
+                      className="bg-white border border-gray-400 hover:bg-gray-200 rounded-md px-3 py-2"
+                      onClick={addToCart}
+                    >
                       Add to cart
                     </button>
                   </div>

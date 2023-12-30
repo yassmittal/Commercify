@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 
 import Similarproducts from "./similarproducts";
@@ -11,6 +11,7 @@ export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -27,6 +28,32 @@ export default function ProductDetail() {
 
     fetchProduct();
   }, []);
+
+  // console.log(product)
+
+  function addToCart() {
+    if (cartItems.length == 0) {
+      setCartItems([product]);
+      return;
+    }
+
+    const isItemPresent = cartItems.filter((cartItem) => {
+      return cartItem.id === product.id;
+    });
+    console.log(isItemPresent);
+    if (isItemPresent) {
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.id === product.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          item;
+        }
+      });
+      setCartItems(updatedCartItems);
+    } else {
+      setCartItems([...cartItems, product]);
+    }
+  }
 
   return (
     <div>
@@ -45,6 +72,7 @@ export default function ProductDetail() {
             price={product.price}
             description={product.description}
             loading={loading}
+            addToCart={addToCart}
           />
           <Similarproducts
             category={product.category}
