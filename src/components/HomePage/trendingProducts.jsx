@@ -58,7 +58,7 @@ export default function TrendingProducts() {
                   price={product.price}
                   isFavoirate={product.isFavoirate}
                   key={product.id}
-                  iconClick={() => toggleFavoirate(product.id)}
+                  // iconClick={() => toggleFavoirate(product.id)}
                   id={product.id}
                 />
               );
@@ -86,7 +86,7 @@ export function SingleProduct({ name, img, price, isFavoirate, iconClick, id }) 
           className="text-[#712689] absolute top-3 right-3"
           onClick={(e) => {
             e.stopPropagation();
-            iconClick();
+            // iconClick();
           }}
         >
           {isFavoirate ? <HeartFilledIcon /> : <HeartOutlinedIcon />}

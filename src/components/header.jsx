@@ -2,12 +2,14 @@ import { CartIcon, HeartFilledIcon, ProfileIcon } from "./DynamicIcons";
 import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router";
 
 // eslint-disable-next-line react/prop-types
 export default function Header() {
   const [user, setUser] = useState();
   const [isOpen, setisOpen] = useState(false);
 
+  const navigate = useNavigate();
   const responseMessage = (response) => {
     const decodedToken = jwtDecode(response.credential);
 
@@ -44,7 +46,7 @@ export default function Header() {
           />
         </div>
 
-        <button className="text-[#712689] px-2">
+        <button className="text-[#712689] px-2" onClick={() => navigate('/cart')}>
           <CartIcon />
         </button>
 
