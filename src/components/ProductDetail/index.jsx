@@ -1,59 +1,18 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
 // import { useParams } from "react-router-dom";
 
 import Similarproducts from "./similarproducts";
 import ProductDetails from "./productDetails";
 import ProductDetailPlaceholder from "./productDetailPlaceholder";
 import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProductsPlaceholder";
-import { useParams } from "react-router/dist";
+import { useParams } from "react-router";
 
-export default function ProductDetail() {
-  const { id } = useParams();
-  const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [cartItems, setCartItems] = useState([]);
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-        const data = await response.json();
+export default function ProductDetail({ loading, products }) {
+  let { id } = useParams();
 
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, []);
-
-  // console.log(product)
-
-  function addToCart() {
-    if (cartItems.length == 0) {
-      setCartItems([product]);
-      return;
-    }
-
-    const isItemPresent = cartItems.filter((cartItem) => {
-      return cartItem.id === product.id;
-    });
-    console.log(isItemPresent);
-    if (isItemPresent) {
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.id === product.id) {
-          return { ...item, quantity: item.quantity + 1 };
-        } else {
-          item;
-        }
-      });
-      setCartItems(updatedCartItems);
-    } else {
-      setCartItems([...cartItems, product]);
-    }
-  }
+  let product = products.find((product) => {
+    return +product.id === +id;
+  });
 
   return (
     <div>
@@ -71,8 +30,7 @@ export default function ProductDetail() {
             title={product.title}
             price={product.price}
             description={product.description}
-            loading={loading}
-            addToCart={addToCart}
+            category={product.category}
           />
           <Similarproducts
             category={product.category}

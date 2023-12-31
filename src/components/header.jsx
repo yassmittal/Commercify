@@ -1,36 +1,20 @@
+/* eslint-disable react/prop-types */
 import { CartIcon, HeartFilledIcon, ProfileIcon } from "./DynamicIcons";
 import { GoogleLogin } from "@react-oauth/google";
-import { useState } from "react";
-import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router";
 
 // eslint-disable-next-line react/prop-types
-export default function Header() {
-  const [user, setUser] = useState();
-  const [isOpen, setisOpen] = useState(false);
-
-  const navigate = useNavigate();
-  const responseMessage = (response) => {
-    const decodedToken = jwtDecode(response.credential);
-
-    setUser({
-      email: decodedToken.email,
-      name: decodedToken.name,
-      picture: decodedToken.picture,
-    });
-    setisOpen(false)
-  };
-  const errorMessage = (error) => {
-    console.log(error);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
-
+export default function Header({
+  navigateToCart,
+  user,
+  responseMessage,
+  errorMessage,
+  handleLogout,
+  toggleDropdown,
+  isOpen,
+  cartItemsNumber,
+}) {
   return (
     <>
-      {user && <></>}
       <div className="w-full px-4 py-2 bg-violet-100 text-white flex items-center gap-3">
         <div>
           <a href="#">
@@ -46,8 +30,19 @@ export default function Header() {
           />
         </div>
 
-        <button className="text-[#712689] px-2" onClick={() => navigate('/cart')}>
+        <button
+          className="text-[#712689] px-2 relative"
+          onClick={navigateToCart}
+        >
           <CartIcon />
+          {cartItemsNumber > 0 && (
+            <span className="w-4 h-4 bg-red-800 text-white text-xs leading-4 text-center rounded-full absolute -top-1 right-0">
+              {cartItemsNumber}
+            </span>
+          )}
+          {/* <span className="w-4 h-4 bg-red-800 text-white text-xs leading-4 text-center rounded-full absolute -top-1 right-0">
+            3
+          </span> */}
         </button>
 
         <button className="text-[#712689] px-2">
@@ -56,7 +51,7 @@ export default function Header() {
 
         <button
           className="text-[#712689] px-2 relative"
-          onClick={() => setisOpen(!isOpen)}
+          onClick={toggleDropdown}
         >
           {user && user.picture ? (
             <div className="w-6 h-6">
