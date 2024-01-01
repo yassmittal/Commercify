@@ -8,6 +8,7 @@ import { Route, Routes, useNavigate, useParams } from "react-router/dist";
 import Cart from "./components/cart";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import SelectDeliveryAddress from "./components/cart/selectDeliveryAddress";
 
 function App() {
   const [user, setUser] = useState();
@@ -194,6 +195,11 @@ function App() {
               removeProduct={removeProduct}
             />
           }
+        />
+
+        <Route
+          path="/choose-delivery-add"
+          element={<SelectDeliveryAddress />}
         />
       </Routes>
     </>

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router";
+
 /* eslint-disable react/prop-types */
 export default function Cart({
   cartItems,
@@ -6,6 +8,7 @@ export default function Cart({
   changeProductQuantity,
   removeProduct,
 }) {
+  const navigate = useNavigate();
   return (
     <div className="p-5 max-w-[700px] mx-auto">
       <h2 className="font-semibold text-4xl text-center mb-4">Cart Summary</h2>
@@ -26,7 +29,7 @@ export default function Cart({
                       <span>Size: </span>
                       <span className="font-medium">XS</span>
                     </p>
-                    <p className="text-gray-500 text-xs my-1">
+                    <p className="text-gray-500 text-xs mt-1 mb-3">
                       <span>Price: </span>
                       <span className="font-medium">$ {cartItem.title}</span>
                     </p>
@@ -55,6 +58,13 @@ export default function Cart({
                         onClick={() => removeProduct(cartItem.id)}
                       >
                         remove
+                      </button>
+
+                      <button
+                        className="bg-[#712689] rounded-md px-4 py-2 ms-3 text-white"
+                        onClick={() => navigate("/choose-delivery-add")}
+                      >
+                        Checkout
                       </button>
                     </div>
                   </div>
