@@ -27,8 +27,6 @@ export default function Categories() {
     fetchProduct();
   }, []);
 
-  console.log("products", products);
-
   return (
     <div className="p-5">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-12">

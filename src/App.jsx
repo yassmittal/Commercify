@@ -33,11 +33,7 @@ function App() {
       cartItemsNumber = cartItemsQuantityArr.reduce(
         (acc, current) => +acc + +current
       );
-    } else {
-      console.log("else condition inner");
     }
-  } else {
-    console.log("else condition outer");
   }
 
   useEffect(() => {
@@ -49,15 +45,12 @@ function App() {
 
     if (cartItems.length == 0) {
       setCartItems([{ ...clickedProduct, quantity: 1 }]);
-      console.log("cartitemslength0");
       return;
     }
 
     const isItemPresent = cartItems.find((cartItem) => {
       return cartItem.id == productId;
     });
-
-    // console.log(isItemPresent);
 
     if (isItemPresent) {
       const updatedCartItems = cartItems.map((item) => {
@@ -100,35 +93,52 @@ function App() {
   };
 
   function increaseProductQuantity(itemId) {
-    const duplicateArray = [...cartItems]
+    const duplicateArray = [...cartItems];
     const selectedCartItem = duplicateArray.find((cartItem) => {
       return itemId == cartItem.id;
     });
 
     ++selectedCartItem.quantity;
-    setCartItems(duplicateArray)
-
+    setCartItems(duplicateArray);
   }
 
   function decreaseProductQuantity(itemId) {
-    const duplicateArray = [...cartItems]
+    const duplicateArray = [...cartItems];
     const selectedCartItem = duplicateArray.find((cartItem) => {
       return itemId == cartItem.id;
     });
 
-    --selectedCartItem.quantity;
-    setCartItems(duplicateArray)
-    console.log("decreased");
+    if (selectedCartItem && selectedCartItem.quantity > 1) {
+      --selectedCartItem.quantity;
+      setCartItems(duplicateArray);
+    } else if (selectedCartItem && selectedCartItem.quantity == 1) {
+      removeProduct(itemId);
+    }
   }
 
-  function changeProductQuantity(e , itemId) {
-    const duplicateArray = [...cartItems]
+  function changeProductQuantity(e, itemId) {
+    const duplicateArray = [...cartItems];
     const selectedCartItem = duplicateArray.find((cartItem) => {
       return itemId == cartItem.id;
     });
 
     selectedCartItem.quantity = e.target.value;
-    setCartItems(duplicateArray)
+    setCartItems(duplicateArray);
+  }
+
+  function removeProduct(itemId) {
+    const duplicateArray = [...cartItems];
+
+    const selectedCartItem = duplicateArray.find((cartItem) => {
+      return itemId == cartItem.id;
+    });
+
+    const selectedProductIndex = duplicateArray.indexOf(selectedCartItem);
+
+    if (selectedProductIndex > -1) {
+      duplicateArray.splice(selectedProductIndex, 1);
+    }
+    setCartItems(duplicateArray);
   }
 
   useEffect(() => {
@@ -181,6 +191,7 @@ function App() {
               increaseProductQuantity={increaseProductQuantity}
               decreaseProductQuantity={decreaseProductQuantity}
               changeProductQuantity={changeProductQuantity}
+              removeProduct={removeProduct}
             />
           }
         />
