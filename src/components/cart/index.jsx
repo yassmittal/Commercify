@@ -3,7 +3,8 @@ export default function Cart({
   cartItems,
   increaseProductQuantity,
   decreaseProductQuantity,
-  changeProductQuantity
+  changeProductQuantity,
+  removeProduct,
 }) {
   return (
     <div className="p-5 max-w-[700px] mx-auto">
@@ -40,7 +41,7 @@ export default function Cart({
                         type="text"
                         value={cartItem.quantity}
                         className="max-w-[30px] text-center"
-                        onChange={(e) => changeProductQuantity(e , cartItem.id)}
+                        onChange={(e) => changeProductQuantity(e, cartItem.id)}
                       />
                       <button
                         className="rounded-full w-6 h-6 leading-none border border-gray-500 bg-gray-200 flex items-center justify-center"
@@ -49,7 +50,10 @@ export default function Cart({
                         +
                       </button>
 
-                      <button className="bg-red-600 rounded-md px-4 py-2 ms-auto text-white">
+                      <button
+                        className="bg-red-600 rounded-md px-4 py-2 ms-auto text-white"
+                        onClick={() => removeProduct(cartItem.id)}
+                      >
                         remove
                       </button>
                     </div>

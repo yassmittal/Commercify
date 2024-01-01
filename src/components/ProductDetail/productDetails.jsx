@@ -10,6 +10,7 @@ export default function ProductDetails({
   loading,
   addToCart,
   productId,
+  
 }) {
   return (
     <>
