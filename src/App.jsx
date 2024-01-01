@@ -22,35 +22,55 @@ function App() {
       : []
   );
 
+  let cartItemsNumber = null;
+
+  let cartItemsQuantityArr = cartItems.map((cartItem) => {
+    return cartItem.quantity;
+  });
+
+  if (cartItemsQuantityArr != 0) {
+    console.log(cartItemsQuantityArr);
+    if (cartItemsQuantityArr != []) {
+      cartItemsNumber = cartItemsQuantityArr.reduce(
+        (acc, current) => acc + current
+      );
+    } else {
+      console.log("else condition inner");
+    }
+  } else {
+    console.log("else condition outer");
+  }
+
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // let product = products.find((product) => {
-  //   return +product.id === +id;
-  // });
+  function addToCart(productId) {
+    let clickedProduct = products.find((product) => product.id == productId);
 
-  function addToCart() {
     if (cartItems.length == 0) {
-      setCartItems([{ ...product, quantity: 1 }]);
+      setCartItems([{ ...clickedProduct, quantity: 1 }]);
+      console.log("cartitemslength0");
       return;
     }
 
-    const isItemPresent = cartItems.filter((cartItem) => {
-      return cartItem.id === product.id;
+    const isItemPresent = cartItems.find((cartItem) => {
+      return cartItem.id == productId;
     });
+
     // console.log(isItemPresent);
+
     if (isItemPresent) {
       const updatedCartItems = cartItems.map((item) => {
-        if (item.id === product.id) {
+        if (item.id == productId) {
           return { ...item, quantity: ++item.quantity };
         } else {
-          item;
+          return item;
         }
       });
       setCartItems(updatedCartItems);
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      setCartItems([...cartItems, { ...clickedProduct, quantity: 1 }]);
     }
   }
 
@@ -107,7 +127,7 @@ function App() {
         handleLogout={handleLogout}
         toggleDropdown={toggleDropdown}
         isOpen={isOpen}
-        cartItemsNumber={cartItems.length}
+        cartItemsNumber={cartItemsNumber}
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -122,7 +142,7 @@ function App() {
           }
         />
         <Route path="/:category" element={<Categories />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems}/>} />
       </Routes>
     </>
   );

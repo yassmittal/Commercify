@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
 import { StarIcon } from "../DynamicIcons";
 import ProductDetailPlaceholder from "./productDetailPlaceholder";
-import Similarproducts from "./similarproducts";
 
 export default function ProductDetails({
   productImg,
@@ -11,6 +9,7 @@ export default function ProductDetails({
   description,
   loading,
   addToCart,
+  productId,
 }) {
   return (
     <>
@@ -21,7 +20,7 @@ export default function ProductDetails({
           <div className="p-6">
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-6 gap-4">
-                <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 h-[400px]">
+                <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 min-h-[400px] h-full">
                   <img
                     src={productImg}
                     alt=""
@@ -65,7 +64,7 @@ export default function ProductDetails({
                     </button>
                     <button
                       className="bg-white border border-gray-400 hover:bg-gray-200 rounded-md px-3 py-2"
-                      onClick={addToCart}
+                      onClick={() => addToCart(productId)}
                     >
                       Add to cart
                     </button>
