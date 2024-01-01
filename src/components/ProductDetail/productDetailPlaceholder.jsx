@@ -3,7 +3,7 @@ export default function ProductDetailPlaceholder() {
     <div className="p-6">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-6 gap-4">
-          <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 h-[400px]">
+          <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 min-h-[400px] h-full">
             {/* placeholder for image  */}
             <div className="loads w-full h-full rounded-sm"></div>
           </div>

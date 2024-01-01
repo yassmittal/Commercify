@@ -7,7 +7,7 @@ import ProductDetailPlaceholder from "./productDetailPlaceholder";
 import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProductsPlaceholder";
 import { useParams } from "react-router";
 
-export default function ProductDetail({ loading, products }) {
+export default function ProductDetail({ loading, products, addToCart }) {
   let { id } = useParams();
 
   let product = products.find((product) => {
@@ -31,6 +31,8 @@ export default function ProductDetail({ loading, products }) {
             price={product.price}
             description={product.description}
             category={product.category}
+            productId={id}
+            addToCart={addToCart}
           />
           <Similarproducts
             category={product.category}

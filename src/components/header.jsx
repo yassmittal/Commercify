@@ -35,7 +35,7 @@ export default function Header({
           onClick={navigateToCart}
         >
           <CartIcon />
-          {cartItemsNumber > 0 && (
+          {cartItemsNumber && (
             <span className="w-4 h-4 bg-red-800 text-white text-xs leading-4 text-center rounded-full absolute -top-1 right-0">
               {cartItemsNumber}
             </span>
