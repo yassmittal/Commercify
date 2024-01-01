@@ -29,10 +29,9 @@ function App() {
   });
 
   if (cartItemsQuantityArr != 0) {
-    console.log(cartItemsQuantityArr);
     if (cartItemsQuantityArr != []) {
       cartItemsNumber = cartItemsQuantityArr.reduce(
-        (acc, current) => acc + current
+        (acc, current) => +acc + +current
       );
     } else {
       console.log("else condition inner");
@@ -100,6 +99,38 @@ function App() {
     setUser(null);
   };
 
+  function increaseProductQuantity(itemId) {
+    const duplicateArray = [...cartItems]
+    const selectedCartItem = duplicateArray.find((cartItem) => {
+      return itemId == cartItem.id;
+    });
+
+    ++selectedCartItem.quantity;
+    setCartItems(duplicateArray)
+
+  }
+
+  function decreaseProductQuantity(itemId) {
+    const duplicateArray = [...cartItems]
+    const selectedCartItem = duplicateArray.find((cartItem) => {
+      return itemId == cartItem.id;
+    });
+
+    --selectedCartItem.quantity;
+    setCartItems(duplicateArray)
+    console.log("decreased");
+  }
+
+  function changeProductQuantity(e , itemId) {
+    const duplicateArray = [...cartItems]
+    const selectedCartItem = duplicateArray.find((cartItem) => {
+      return itemId == cartItem.id;
+    });
+
+    selectedCartItem.quantity = e.target.value;
+    setCartItems(duplicateArray)
+  }
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -142,7 +173,17 @@ function App() {
           }
         />
         <Route path="/:category" element={<Categories />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems}/>} />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cartItems={cartItems}
+              increaseProductQuantity={increaseProductQuantity}
+              decreaseProductQuantity={decreaseProductQuantity}
+              changeProductQuantity={changeProductQuantity}
+            />
+          }
+        />
       </Routes>
     </>
   );
