@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
-export default function Cart({ cartItems }) {
-  console.log(cartItems);
+export default function Cart({
+  cartItems,
+  increaseProductQuantity,
+  decreaseProductQuantity,
+  changeProductQuantity
+}) {
   return (
     <div className="p-5 max-w-[700px] mx-auto">
       <h2 className="font-semibold text-4xl text-center mb-4">Cart Summary</h2>
@@ -26,15 +30,22 @@ export default function Cart({ cartItems }) {
                       <span className="font-medium">$ {cartItem.title}</span>
                     </p>
                     <div className="flex items-center gap-3 ">
-                      <button className="rounded-full w-6 h-6 leading-none border border-gray-500 bg-gray-200 flex items-center justify-center">
+                      <button
+                        className="rounded-full w-6 h-6 leading-none border border-gray-500 bg-gray-200 flex items-center justify-center"
+                        onClick={() => decreaseProductQuantity(cartItem.id)}
+                      >
                         -
                       </button>
                       <input
                         type="text"
                         value={cartItem.quantity}
                         className="max-w-[30px] text-center"
+                        onChange={(e) => changeProductQuantity(e , cartItem.id)}
                       />
-                      <button className="rounded-full w-6 h-6 leading-none border border-gray-500 bg-gray-200 flex items-center justify-center">
+                      <button
+                        className="rounded-full w-6 h-6 leading-none border border-gray-500 bg-gray-200 flex items-center justify-center"
+                        onClick={() => increaseProductQuantity(cartItem.id)}
+                      >
                         +
                       </button>
 
