@@ -31,7 +31,7 @@ export default function Categories() {
 
   return (
     <div className="p-5">
-      <div className="grid grid-cols-4 gap-12">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
         {loading ? (
           <TrendingProductsPlaceholder />
         ) : (
