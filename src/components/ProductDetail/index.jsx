@@ -6,47 +6,14 @@ import ProductDetails from "./productDetails";
 import ProductDetailPlaceholder from "./productDetailPlaceholder";
 import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProductsPlaceholder";
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-export default function ProductDetail({ loading, products, addToCart }) {
-  const [favProducts, setFavProducts] = useState(
-    localStorage.getItem("favProducts")
-      ? JSON.parse(localStorage.getItem("favProducts"))
-      : []
-  );
-
-  useEffect(() => {
-    localStorage.setItem("favProducts", JSON.stringify(favProducts));
-  }, [favProducts]);
-
+export default function ProductDetail({ loading, products, addToCart , onClickFav }) {
   let { id } = useParams();
 
   let product = products.find((product) => {
     return +product.id === +id;
   });
-
-  function onClickFav(Itemid) {
-    const clickedProduct = products.find((product) => product.id == Itemid);
-    const duplicateFavProducts = [...favProducts];
-    if (duplicateFavProducts.length == 0) {
-      duplicateFavProducts.push(clickedProduct);
-      setFavProducts(duplicateFavProducts);
-      return;
-    }
-
-    const isItemPresent = duplicateFavProducts.find((product) => {
-      return product.id == Itemid;
-    });
-
-    if (isItemPresent) {
-      const selectedItemIndex = duplicateFavProducts.indexOf(isItemPresent);
-      duplicateFavProducts.splice(selectedItemIndex, 1);
-      setFavProducts(duplicateFavProducts);
-    } else {
-      duplicateFavProducts.push(clickedProduct);
-      setFavProducts(duplicateFavProducts);
-    }
-  }
 
   return (
     <div>

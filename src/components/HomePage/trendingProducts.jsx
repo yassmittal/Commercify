@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TrendingProductsPlaceholder from "./Placeholders/trendingProductsPlaceholder";
 import { SingleProduct } from "../SingleProduct";
 
-export default function TrendingProducts() {
+export default function TrendingProducts({onClickFav}) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,6 +43,7 @@ export default function TrendingProducts() {
                   price={product.price}
                   key={product.id}
                   id={product.id}
+                  onClickFav={onClickFav}
                 />
               );
             })}
