@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
+import { useNavigate } from "react-router";
 import { CartIcon, HeartFilledIcon, ProfileIcon } from "./DynamicIcons";
 import { GoogleLogin } from "@react-oauth/google";
 
-// eslint-disable-next-line react/prop-types
 export default function Header({
   navigateToCart,
   user,
@@ -13,6 +13,8 @@ export default function Header({
   isOpen,
   cartItemsNumber,
 }) {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="w-full px-4 py-2 bg-violet-100 text-white flex items-center gap-3">
@@ -45,7 +47,10 @@ export default function Header({
           </span> */}
         </button>
 
-        <button className="text-[#712689] px-2">
+        <button
+          className="text-[#712689] px-2"
+          onClick={() => navigate("/favorite-products")}
+        >
           <HeartFilledIcon />
         </button>
 
