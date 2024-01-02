@@ -1,14 +1,14 @@
-// import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/HomePage";
 import Header from "./components/header";
 import Categories from "./components/categoriesPage";
 import ProductDetail from "./components/ProductDetail";
-import { Route, Routes, useNavigate, useParams } from "react-router/dist";
+import { Route, Routes, useNavigate } from "react-router/dist";
 import Cart from "./components/cart";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import SelectDeliveryAddress from "./components/cart/selectDeliveryAddress";
+import FavoriteProducts from "./components/favorite";
 
 function App() {
   const [user, setUser] = useState();
@@ -201,6 +201,8 @@ function App() {
           path="/choose-delivery-add"
           element={<SelectDeliveryAddress />}
         />
+
+        <Route path="/favorite-products" element={<FavoriteProducts />} />
       </Routes>
     </>
   );

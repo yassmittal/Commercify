@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { SingleProduct } from "../HomePage/trendingProducts";
 import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProductsPlaceholder";
+import { SingleProduct } from "../SingleProduct";
 
 // eslint-disable-next-line react/prop-types
-export default function Similarproducts({ category, currentProductId }) {
+export default function Similarproducts({ category, currentProductId  , onClickFav}) {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,9 +41,9 @@ export default function Similarproducts({ category, currentProductId }) {
                 name={product.title}
                 img={product.image}
                 price={product.price}
-                // isFavoirate={product.isFavoirate}
                 key={product.id}
                 id={product.id}
+                onClickFav={onClickFav}
               />
             );
           })}

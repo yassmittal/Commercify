@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-import { SingleProduct } from "../HomePage/trendingProducts";
 import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProductsPlaceholder";
 import { useParams } from "react-router/dist";
+import { SingleProduct } from "../SingleProduct";
 
 export default function Categories() {
   const { category } = useParams();
@@ -40,7 +39,6 @@ export default function Categories() {
                   name={product.title}
                   img={product.image}
                   price={product.price}
-                  isFavoirate={product.isFavoirate}
                   key={product.id}
                   id={product.id}
                 />
