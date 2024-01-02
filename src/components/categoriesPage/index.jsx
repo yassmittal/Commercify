@@ -3,7 +3,8 @@ import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProduc
 import { useParams } from "react-router/dist";
 import { SingleProduct } from "../SingleProduct";
 
-export default function Categories() {
+// eslint-disable-next-line react/prop-types
+export default function Categories({onClickFav}) {
   const { category } = useParams();
   const [products, setProducts] = useState();
   const [loading, setLoading] = useState(true);
@@ -41,6 +42,7 @@ export default function Categories() {
                   price={product.price}
                   key={product.id}
                   id={product.id}
+                  onClickFav={onClickFav}
                 />
               );
             })}

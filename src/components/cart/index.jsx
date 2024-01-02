@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { HeartFilledIcon, HeartOutlinedIcon } from "../DynamicIcons";
 
 /* eslint-disable react/prop-types */
 export default function Cart({
@@ -7,6 +8,7 @@ export default function Cart({
   decreaseProductQuantity,
   changeProductQuantity,
   removeProduct,
+  onClickFav,
 }) {
   const navigate = useNavigate();
   return (
@@ -16,7 +18,7 @@ export default function Cart({
         <ul className="flex flex-col gap-2">
           {cartItems.map((cartItem) => {
             return (
-              <li key={cartItem.id}>
+              <li key={cartItem.id} className="relative">
                 <div className="border border-gray-400 rounded-sm p-4 flex items-center justify-evenly gap-3">
                   <div className="h-full w-32">
                     <img src={cartItem.image} alt="" className="max-w-full" />
@@ -68,6 +70,15 @@ export default function Cart({
                       </button>
                     </div>
                   </div>
+                  <button
+                    className="text-[#712689] absolute top-3 right-3"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onClickFav(cartItem.id);
+                    }}
+                  >
+                    <HeartFilledIcon /> <HeartOutlinedIcon />
+                  </button>
                 </div>
               </li>
             );

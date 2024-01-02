@@ -23,6 +23,39 @@ function App() {
       : []
   );
 
+  const [favProducts, setFavProducts] = useState(
+    localStorage.getItem("favProducts")
+      ? JSON.parse(localStorage.getItem("favProducts"))
+      : []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("favProducts", JSON.stringify(favProducts));
+  }, [favProducts]);
+
+  function onClickFav(Itemid) {
+    const clickedProduct = products.find((product) => product.id == Itemid);
+    const duplicateFavProducts = [...favProducts];
+    if (duplicateFavProducts.length == 0) {
+      duplicateFavProducts.push(clickedProduct);
+      setFavProducts(duplicateFavProducts);
+      return;
+    }
+
+    const isItemPresent = duplicateFavProducts.find((product) => {
+      return product.id == Itemid;
+    });
+
+    if (isItemPresent) {
+      const selectedItemIndex = duplicateFavProducts.indexOf(isItemPresent);
+      duplicateFavProducts.splice(selectedItemIndex, 1);
+      setFavProducts(duplicateFavProducts);
+    } else {
+      duplicateFavProducts.push(clickedProduct);
+      setFavProducts(duplicateFavProducts);
+    }
+  }
+
   let cartItemsNumber = null;
 
   let cartItemsQuantityArr = cartItems.map((cartItem) => {
@@ -172,7 +205,7 @@ function App() {
         cartItemsNumber={cartItemsNumber}
       />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage onClickFav={onClickFav}/>} />
         <Route
           path="/ProductDetail/:id"
           element={
@@ -180,10 +213,14 @@ function App() {
               loading={loading}
               addToCart={addToCart}
               products={products}
+              onClickFav={onClickFav}
             />
           }
         />
-        <Route path="/:category" element={<Categories />} />
+        <Route
+          path="/:category"
+          element={<Categories onClickFav={onClickFav} />}
+        />
         <Route
           path="/cart"
           element={
@@ -193,6 +230,7 @@ function App() {
               decreaseProductQuantity={decreaseProductQuantity}
               changeProductQuantity={changeProductQuantity}
               removeProduct={removeProduct}
+              onClickFav={onClickFav}
             />
           }
         />
@@ -202,7 +240,10 @@ function App() {
           element={<SelectDeliveryAddress />}
         />
 
-        <Route path="/favorite-products" element={<FavoriteProducts />} />
+        <Route
+          path="/favorite-products"
+          element={<FavoriteProducts onClickFav={onClickFav} />}
+        />
       </Routes>
     </>
   );
