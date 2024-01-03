@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { SingleProduct } from "../SingleProduct";
 
-export default function FavoriteProducts({onClickFav}) {
+export default function FavoriteProducts({ onClickFav, isItemFav }) {
   const favProducts = JSON.parse(localStorage.getItem("favProducts"));
 
   return (
@@ -16,6 +16,7 @@ export default function FavoriteProducts({onClickFav}) {
               key={product.id}
               id={product.id}
               onClickFav={onClickFav}
+              isItemFav={isItemFav}
             />
           );
         })}
