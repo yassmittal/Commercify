@@ -3,7 +3,12 @@ import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProduc
 import { SingleProduct } from "../SingleProduct";
 
 // eslint-disable-next-line react/prop-types
-export default function Similarproducts({ category, currentProductId  , onClickFav}) {
+export default function Similarproducts({
+  category,
+  currentProductId,
+  onClickFav,
+  isItemFav,
+}) {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +16,7 @@ export default function Similarproducts({ category, currentProductId  , onClickF
     const fetchSimilarProducts = async () => {
       try {
         const response = await fetch(
-          `https://fakestoreapi.com/products/category/${category}`
+          `https://fakestoreapi.com/products/category/${category}`,
         );
         const data = await response.json();
         setAllProducts(data);
@@ -30,7 +35,7 @@ export default function Similarproducts({ category, currentProductId  , onClickF
   });
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4" >
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4">
       {loading ? (
         <TrendingProductsPlaceholder />
       ) : (
@@ -43,6 +48,7 @@ export default function Similarproducts({ category, currentProductId  , onClickF
                 price={product.price}
                 key={product.id}
                 id={product.id}
+                isItemFav={isItemFav}
                 onClickFav={onClickFav}
               />
             );

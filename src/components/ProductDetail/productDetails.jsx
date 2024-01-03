@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { HeartFilledIcon, HeartOutlinedIcon, StarIcon } from "../DynamicIcons";
 import ProductDetailPlaceholder from "./productDetailPlaceholder";
 
@@ -11,7 +12,15 @@ export default function ProductDetails({
   addToCart,
   productId,
   onClickFav,
+  isItemFav,
 }) {
+  const [isItemPresent, setIsItemPresent] = useState();
+  const favProducts = JSON.parse(localStorage.getItem("favProducts"));
+
+  useEffect(() => {
+    setIsItemPresent(isItemFav(productId));
+  }, [favProducts]);
+
   return (
     <>
       {loading ? (
@@ -34,7 +43,11 @@ export default function ProductDetails({
                       onClickFav(productId);
                     }}
                   >
-                    <HeartFilledIcon /> <HeartOutlinedIcon />
+                    {isItemPresent ? (
+                      <HeartFilledIcon />
+                    ) : (
+                      <HeartOutlinedIcon />
+                    )}
                   </button>
                 </div>
                 <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-4 flex flex-col justify-between">

@@ -20,14 +20,16 @@ function App() {
   const [cartItems, setCartItems] = useState(
     localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
-      : []
+      : [],
   );
 
   const [favProducts, setFavProducts] = useState(
     localStorage.getItem("favProducts")
       ? JSON.parse(localStorage.getItem("favProducts"))
-      : []
+      : [],
   );
+
+  const [itemFav, setItemFav] = useState();
 
   useEffect(() => {
     localStorage.setItem("favProducts", JSON.stringify(favProducts));
@@ -37,7 +39,8 @@ function App() {
     const clickedProduct = products.find((product) => product.id == Itemid);
     const duplicateFavProducts = [...favProducts];
     if (duplicateFavProducts.length == 0) {
-      duplicateFavProducts.push(clickedProduct);
+      duplicateFavProducts.push({ ...clickedProduct, isFavorite: true });
+      setItemFav(true);
       setFavProducts(duplicateFavProducts);
       return;
     }
@@ -49,10 +52,21 @@ function App() {
     if (isItemPresent) {
       const selectedItemIndex = duplicateFavProducts.indexOf(isItemPresent);
       duplicateFavProducts.splice(selectedItemIndex, 1);
+      setItemFav(false);
       setFavProducts(duplicateFavProducts);
     } else {
-      duplicateFavProducts.push(clickedProduct);
+      setItemFav(true);
+      duplicateFavProducts.push({ ...clickedProduct, isFavorite: true });
       setFavProducts(duplicateFavProducts);
+    }
+  }
+
+  function isItemFav(Itemid) {
+    const selectedProduct = favProducts.find((product) => product.id == Itemid);
+    if (selectedProduct) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -65,7 +79,7 @@ function App() {
   if (cartItemsQuantityArr != 0) {
     if (cartItemsQuantityArr != []) {
       cartItemsNumber = cartItemsQuantityArr.reduce(
-        (acc, current) => +acc + +current
+        (acc, current) => +acc + +current,
       );
     }
   }
@@ -205,7 +219,10 @@ function App() {
         cartItemsNumber={cartItemsNumber}
       />
       <Routes>
-        <Route path="/" element={<HomePage onClickFav={onClickFav}/>} />
+        <Route
+          path="/"
+          element={<HomePage onClickFav={onClickFav} isItemFav={isItemFav} />}
+        />
         <Route
           path="/ProductDetail/:id"
           element={
@@ -214,12 +231,13 @@ function App() {
               addToCart={addToCart}
               products={products}
               onClickFav={onClickFav}
+              isItemFav={isItemFav}
             />
           }
         />
         <Route
           path="/:category"
-          element={<Categories onClickFav={onClickFav} />}
+          element={<Categories onClickFav={onClickFav} isItemFav={isItemFav} />}
         />
         <Route
           path="/cart"
@@ -231,6 +249,7 @@ function App() {
               changeProductQuantity={changeProductQuantity}
               removeProduct={removeProduct}
               onClickFav={onClickFav}
+              isItemFav={isItemFav}
             />
           }
         />
@@ -242,7 +261,9 @@ function App() {
 
         <Route
           path="/favorite-products"
-          element={<FavoriteProducts onClickFav={onClickFav} />}
+          element={
+            <FavoriteProducts onClickFav={onClickFav} isItemFav={isItemFav} />
+          }
         />
       </Routes>
     </>

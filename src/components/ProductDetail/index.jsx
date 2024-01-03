@@ -8,7 +8,13 @@ import TrendingProductsPlaceholder from "../HomePage/Placeholders/trendingProduc
 import { useParams } from "react-router";
 // import { useEffect, useState } from "react";
 
-export default function ProductDetail({ loading, products, addToCart , onClickFav }) {
+export default function ProductDetail({
+  loading,
+  products,
+  addToCart,
+  onClickFav,
+  isItemFav,
+}) {
   let { id } = useParams();
 
   let product = products.find((product) => {
@@ -35,11 +41,13 @@ export default function ProductDetail({ loading, products, addToCart , onClickFa
             productId={id}
             addToCart={addToCart}
             onClickFav={onClickFav}
+            isItemFav={isItemFav}
           />
           <Similarproducts
             category={product.category}
             currentProductId={product.id}
             onClickFav={onClickFav}
+            isItemFav={isItemFav}
           />
         </>
       )}
