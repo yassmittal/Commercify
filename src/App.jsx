@@ -29,8 +29,6 @@ function App() {
       : [],
   );
 
-  const [itemFav, setItemFav] = useState();
-
   useEffect(() => {
     localStorage.setItem("favProducts", JSON.stringify(favProducts));
   }, [favProducts]);
@@ -40,7 +38,6 @@ function App() {
     const duplicateFavProducts = [...favProducts];
     if (duplicateFavProducts.length == 0) {
       duplicateFavProducts.push({ ...clickedProduct, isFavorite: true });
-      setItemFav(true);
       setFavProducts(duplicateFavProducts);
       return;
     }
@@ -52,10 +49,8 @@ function App() {
     if (isItemPresent) {
       const selectedItemIndex = duplicateFavProducts.indexOf(isItemPresent);
       duplicateFavProducts.splice(selectedItemIndex, 1);
-      setItemFav(false);
       setFavProducts(duplicateFavProducts);
     } else {
-      setItemFav(true);
       duplicateFavProducts.push({ ...clickedProduct, isFavorite: true });
       setFavProducts(duplicateFavProducts);
     }
