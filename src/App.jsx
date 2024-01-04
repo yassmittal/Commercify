@@ -257,7 +257,11 @@ function App() {
         <Route
           path="/favorite-products"
           element={
-            <FavoriteProducts onClickFav={onClickFav} isItemFav={isItemFav} />
+            <FavoriteProducts
+              onClickFav={onClickFav}
+              isItemFav={isItemFav}
+              user={user}
+            />
           }
         />
       </Routes>
