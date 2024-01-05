@@ -26,8 +26,11 @@ export default function ProductDetail({
       {loading ? (
         <div>
           <ProductDetailPlaceholder />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4">
-            <TrendingProductsPlaceholder />
+          <div className="md:px-5 px-2">
+            <div className="loads w-40 h-3 mt-2 mb-3 rounded-sm"></div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4">
+              <TrendingProductsPlaceholder />
+            </div>
           </div>
         </div>
       ) : (
