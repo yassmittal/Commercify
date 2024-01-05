@@ -17,6 +17,7 @@ export function SingleProduct({ name, img, price, id, onClickFav, isItemFav }) {
       className="shadow-md rounded-b-md cursor-pointer hover:shadow-lg hover:-translate-y-3 transition-all"
       onClick={() => {
         navigate(`/ProductDetail/${id}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }}
     >
       <div className="bg-violet-200 rounded-t-md relative p-3 h-52">

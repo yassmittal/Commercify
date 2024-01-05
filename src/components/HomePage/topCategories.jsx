@@ -11,7 +11,7 @@ export default function TopCategories() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://fakestoreapi.com/products/categories"
+          "https://fakestoreapi.com/products/categories",
         );
         const data = await response.json();
         setFavouriteProducts(data);
@@ -38,13 +38,10 @@ export default function TopCategories() {
           ) : (
             // Render the actual product list once data is fetched
             <>
-              {favouriteProducts.map((product , index) => {
+              {favouriteProducts.map((product, index) => {
                 return (
                   // eslint-disable-next-line react/jsx-key
-                  <CategoryCard
-                    categoryCardTitle={product}
-                    key={index}
-                  />
+                  <CategoryCard categoryCardTitle={product} key={index} />
                 );
               })}
             </>
@@ -63,6 +60,7 @@ function CategoryCard({ categoryCardTitle }) {
       className="border border-gray-300 rounded-lg py-5 px-4 text-center cursor-pointer hover:border-transparent hover:-translate-y-1 hover:shadow-md transition-all list-none"
       onClick={() => {
         navigate(`/${categoryCardTitle}`);
+        window.scroll({ top: 0, behavior: "smooth" });
       }}
     >
       <p>{categoryCardTitle}</p>
