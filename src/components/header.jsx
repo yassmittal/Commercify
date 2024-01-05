@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { CartIcon, HeartFilledIcon, ProfileIcon } from "./DynamicIcons";
 import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
+import Logo from "/Logo.png";
 
 export default function Header({
   navigateToCart,
@@ -21,7 +22,7 @@ export default function Header({
       <div className="w-full px-4 py-2 bg-violet-100 text-white flex items-center gap-3">
         <div>
           <Link to={"/"}>
-            <img src="./Logo.png" alt="" className="w-20" />
+            <img src={Logo} alt="" className="w-20" />
           </Link>
         </div>
 
