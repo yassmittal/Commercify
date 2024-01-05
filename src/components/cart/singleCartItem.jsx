@@ -23,7 +23,14 @@ export default function SingleCartItem({
   }, [favProducts]);
 
   return (
-    <li key={cartItemId} className="relative">
+    <li
+      key={cartItemId}
+      className="relative cursor-pointer"
+      onClick={() => {
+        navigate(`/ProductDetail/${cartItemId}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+    >
       <div className="border border-gray-400 rounded-sm p-4 flex items-center justify-evenly gap-3">
         <div className="h-full w-32">
           <img src={cartItemImg} alt="" className="max-w-full" />
@@ -41,7 +48,10 @@ export default function SingleCartItem({
           <div className="flex items-center gap-3 ">
             <button
               className="rounded-full w-6 h-6 leading-none border border-gray-500 bg-gray-200 flex items-center justify-center"
-              onClick={() => decreaseProductQuantity(cartItemId)}
+              onClick={(e) => {
+                e.stopPropagation();
+                decreaseProductQuantity(cartItemId);
+              }}
             >
               -
             </button>
@@ -49,30 +59,44 @@ export default function SingleCartItem({
               type="text"
               value={cartItemQuantity}
               className="max-w-[30px] text-center"
-              onChange={(e) => changeProductQuantity(e, cartItemId)}
+              onClick={(e) => e.stopPropagation()}
+              onChange={(e) => {
+                e.stopPropagation();
+                changeProductQuantity(e, cartItemId);
+              }}
             />
             <button
               className="rounded-full w-6 h-6 leading-none border border-gray-500 bg-gray-200 flex items-center justify-center"
-              onClick={() => increaseProductQuantity(cartItemId)}
+              onClick={(e) => {
+                e.stopPropagation();
+                increaseProductQuantity(cartItemId);
+              }}
             >
               +
             </button>
 
             <button
               className="bg-red-600 rounded-md px-4 py-2 ms-auto text-white"
-              onClick={() => removeProduct(cartItemId)}
+              onClick={(e) => {
+                e.stopPropagation();
+                removeProduct(cartItemId);
+              }}
             >
               remove
             </button>
 
             <button
               className="bg-[#712689] rounded-md px-4 py-2 ms-3 text-white"
-              onClick={() => navigate("/choose-delivery-add")}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate("/choose-delivery-add");
+              }}
             >
               Checkout
             </button>
           </div>
         </div>
+
         <button
           className="text-[#712689] absolute top-3 right-3"
           onClick={(e) => {
