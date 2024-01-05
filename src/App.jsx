@@ -1,6 +1,5 @@
 import "./App.css";
 import HomePage from "./components/HomePage";
-import Header from "./components/header";
 import Categories from "./components/categoriesPage";
 import ProductDetail from "./components/ProductDetail";
 import { Route, Routes, useNavigate } from "react-router/dist";
@@ -9,6 +8,8 @@ import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import SelectDeliveryAddress from "./components/cart/selectDeliveryAddress";
 import FavoriteProducts from "./components/favorite";
+import Header from "./components/header";
+import SearchResults from "./components/header/searchResults";
 
 function App() {
   const [user, setUser] = useState();
@@ -212,6 +213,7 @@ function App() {
         toggleDropdown={toggleDropdown}
         isOpen={isOpen}
         cartItemsNumber={cartItemsNumber}
+        products={products}
       />
       <Routes>
         <Route
@@ -264,6 +266,8 @@ function App() {
             />
           }
         />
+
+        <Route path="/searh-result" element={<SearchResults />} />
       </Routes>
     </>
   );
