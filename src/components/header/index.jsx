@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router";
-import { CartIcon, HeartFilledIcon, ProfileIcon } from "./DynamicIcons";
+import { CartIcon, HeartFilledIcon, ProfileIcon } from "../DynamicIcons";
 import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import Logo from "/Logo.png";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import App from "../../App";
 
 export default function Header({
   navigateToCart,
@@ -14,8 +17,37 @@ export default function Header({
   toggleDropdown,
   isOpen,
   cartItemsNumber,
+  products,
 }) {
+  const [searching, setSearching] = useState(false);
+  const [resultArr, setResultArr] = useState([]);
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
+
+  function searchProduct(searchText) {
+    setQuery(searchText);
+    setSearching(true);
+    setResultArr(search(products));
+  }
+
+  const search_parameters = Object.keys(Object.assign({}, ...products));
+
+  function search(products) {
+    console.log(searching);
+    return products.filter((product) =>
+      search_parameters.some((parameter) =>
+        product[parameter].toString().toLowerCase().includes(query),
+      ),
+    );
+  }
+
+  function showResult(resultArr) {
+    console.log(resultArr);
+  }
+
+  console.log(resultArr);
+  // useEffect(() => {
+  // }, []);
 
   return (
     <>
@@ -26,12 +58,53 @@ export default function Header({
           </Link>
         </div>
 
-        <div className="w-full">
-          <input
-            type="search"
-            className="px-4 py-2 rounded-md w-full outline-none text-black text-lg"
-            placeholder="Search Your Product"
-          />
+        <div className="w-full relative">
+          <form
+            action="#"
+            onSubmit={(e) => {
+              e.preventDefault();
+              showResult();
+            }}
+          >
+            <input
+              type="search"
+              className="px-4 py-2 rounded-md w-full outline-none text-black text-lg z-10 relative"
+              placeholder="Search Your Product"
+              onChange={(e) => searchProduct(e.target.value)}
+            />
+          </form>
+
+          {searching ? (
+            <>
+              <div className="absolute top-full bg-white border border-gray-300 rounded-md w-full text-black z-10 divide-gray-300  divide-y max-h-[300px] overflow-auto">
+                {resultArr.map((item) => {
+                  return (
+                    <Link
+                      to={{
+                        pathname: "/searh-result",
+                        state: { exampleProp: "resultArr" },
+                      }}
+                      className="px-3 py-2 cursor-pointer block"
+                      key={item.id}
+                      onClick={() => showResult(resultArr)}
+                    >
+                      {item.title}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {createPortal(
+                <div
+                  className="absolute inset-0"
+                  onClick={() => setSearching(false)}
+                ></div>,
+                document.body,
+              )}
+            </>
+          ) : (
+            ""
+          )}
         </div>
 
         <button
