@@ -35,26 +35,29 @@ export default function Similarproducts({
   });
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4">
-      {loading ? (
-        <TrendingProductsPlaceholder />
-      ) : (
-        <>
-          {similarProducts.map((product) => {
-            return (
-              <SingleProduct
-                name={product.title}
-                img={product.image}
-                price={product.price}
-                key={product.id}
-                id={product.id}
-                isItemFav={isItemFav}
-                onClickFav={onClickFav}
-              />
-            );
-          })}
-        </>
-      )}
+    <div className="md:px-5 px-2">
+      <h2 className="font-semibold text-2xl">Similar Products</h2>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4">
+        {loading ? (
+          <TrendingProductsPlaceholder />
+        ) : (
+          <>
+            {similarProducts.map((product) => {
+              return (
+                <SingleProduct
+                  name={product.title}
+                  img={product.image}
+                  price={product.price}
+                  key={product.id}
+                  id={product.id}
+                  isItemFav={isItemFav}
+                  onClickFav={onClickFav}
+                />
+              );
+            })}
+          </>
+        )}
+      </div>
     </div>
   );
 }
