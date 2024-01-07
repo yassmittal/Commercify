@@ -4,9 +4,7 @@ import { CartIcon, HeartFilledIcon, ProfileIcon } from "../DynamicIcons";
 import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import Logo from "/Logo.png";
-import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import App from "../../App";
 
 export default function Header({
   navigateToCart,
@@ -17,38 +15,13 @@ export default function Header({
   toggleDropdown,
   isOpen,
   cartItemsNumber,
-  products,
+  showResult,
+  searching,
+  resultArr,
+  searchProduct,
+  setSearching,
 }) {
-  const [searching, setSearching] = useState(false);
-  const [resultArr, setResultArr] = useState([]);
-  const [query, setQuery] = useState("");
   const navigate = useNavigate();
-
-  function searchProduct(searchText) {
-    setQuery(searchText);
-    setSearching(true);
-    setResultArr(search(products));
-  }
-
-  const search_parameters = Object.keys(Object.assign({}, ...products));
-
-  function search(products) {
-    console.log(searching);
-    return products.filter((product) =>
-      search_parameters.some((parameter) =>
-        product[parameter].toString().toLowerCase().includes(query),
-      ),
-    );
-  }
-
-  function showResult(resultArr) {
-    console.log(resultArr);
-  }
-
-  console.log(resultArr);
-  // useEffect(() => {
-  // }, []);
-
   return (
     <>
       <div className="w-full px-4 py-2 bg-violet-100 text-white flex items-center gap-3">

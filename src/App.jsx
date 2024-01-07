@@ -30,6 +30,31 @@ function App() {
       : [],
   );
 
+  const [searching, setSearching] = useState(false);
+  const [resultArr, setResultArr] = useState([]);
+  const [query, setQuery] = useState("");
+
+  function searchProduct(searchText) {
+    setQuery(searchText);
+    setSearching(true);
+    setResultArr(search(products));
+  }
+
+  const search_parameters = Object.keys(Object.assign({}, ...products));
+
+  function search(products) {
+    console.log(searching);
+    return products.filter((product) =>
+      search_parameters.some((parameter) =>
+        product[parameter].toString().toLowerCase().includes(query),
+      ),
+    );
+  }
+
+  function showResult(resultArr) {
+    console.log(resultArr);
+  }
+
   useEffect(() => {
     localStorage.setItem("favProducts", JSON.stringify(favProducts));
   }, [favProducts]);
@@ -213,7 +238,11 @@ function App() {
         toggleDropdown={toggleDropdown}
         isOpen={isOpen}
         cartItemsNumber={cartItemsNumber}
-        products={products}
+        showResult={showResult}
+        searching={searching}
+        resultArr={resultArr}
+        setSearching={setSearching}
+        searchProduct={searchProduct}
       />
       <Routes>
         <Route
@@ -267,7 +296,17 @@ function App() {
           }
         />
 
-        <Route path="/searh-result" element={<SearchResults />} />
+        <Route
+          path="/searh-result"
+          element={
+            <SearchResults
+              resultArr={resultArr}
+              loading={loading}
+              onClickFav={onClickFav}
+              isItemFav={isItemFav}
+            />
+          }
+        />
       </Routes>
     </>
   );
