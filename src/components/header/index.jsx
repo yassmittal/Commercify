@@ -24,7 +24,7 @@ export default function Header({
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full px-4 py-2 bg-violet-100 text-white flex items-center gap-3">
+      <div className="w-full px-4 py-2 bg-violet-100 text-white flex items-center gap-3 fixed z-10">
         <div>
           <Link to={"/"}>
             <img src={Logo} alt="" className="w-20" />
