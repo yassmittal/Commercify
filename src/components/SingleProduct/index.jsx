@@ -34,7 +34,6 @@ export function SingleProduct({ name, img, price, id, onClickFav, isItemFav }) {
       </div>
       <div className="bg-white px-3 py-2 flex justify-between rounded-b-md">
         <p className="font-semibold text-lg twoLinesOnly me-2">{name}</p>
-
         <p className="text-[#712689] font-semibold text-xl whitespace-nowrap">
           ${price}
         </p>
