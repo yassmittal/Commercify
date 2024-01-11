@@ -245,82 +245,86 @@ function App() {
         setSearching={setSearching}
         searchProduct={searchProduct}
       />
-      <Routes>
-        <Route
-          path="/"
-          element={<HomePage onClickFav={onClickFav} isItemFav={isItemFav} />}
-        />
-        <Route
-          path="/ProductDetail/:id"
-          element={
-            <ProductDetail
-              loading={loading}
-              addToCart={addToCart}
-              products={products}
-              onClickFav={onClickFav}
-              isItemFav={isItemFav}
-            />
-          }
-        />
-        <Route
-          path="/:category"
-          element={<Categories onClickFav={onClickFav} isItemFav={isItemFav} />}
-        />
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              cartItems={cartItems}
-              increaseProductQuantity={increaseProductQuantity}
-              decreaseProductQuantity={decreaseProductQuantity}
-              changeProductQuantity={changeProductQuantity}
-              removeProduct={removeProduct}
-              onClickFav={onClickFav}
-              isItemFav={isItemFav}
-            />
-          }
-        />
+      <div className="pt-[76px]">
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage onClickFav={onClickFav} isItemFav={isItemFav} />}
+          />
+          <Route
+            path="/ProductDetail/:id"
+            element={
+              <ProductDetail
+                loading={loading}
+                addToCart={addToCart}
+                products={products}
+                onClickFav={onClickFav}
+                isItemFav={isItemFav}
+              />
+            }
+          />
+          <Route
+            path="/:category"
+            element={
+              <Categories onClickFav={onClickFav} isItemFav={isItemFav} />
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cartItems={cartItems}
+                increaseProductQuantity={increaseProductQuantity}
+                decreaseProductQuantity={decreaseProductQuantity}
+                changeProductQuantity={changeProductQuantity}
+                removeProduct={removeProduct}
+                onClickFav={onClickFav}
+                isItemFav={isItemFav}
+              />
+            }
+          />
 
-        <Route
-          path="/choose-delivery-add"
-          element={<SelectDeliveryAddress />}
-        />
+          <Route
+            path="/choose-delivery-add"
+            element={<SelectDeliveryAddress />}
+          />
 
-        <Route
-          path="/favorite-products"
-          element={
-            <FavoriteProducts
-              onClickFav={onClickFav}
-              isItemFav={isItemFav}
-              user={user}
-            />
-          }
-        />
+          <Route
+            path="/favorite-products"
+            element={
+              <FavoriteProducts
+                onClickFav={onClickFav}
+                isItemFav={isItemFav}
+                user={user}
+              />
+            }
+          />
 
-        <Route
-          path="/searh-result"
-          element={
-            <SearchResults
-              resultArr={resultArr}
-              loading={loading}
-              onClickFav={onClickFav}
-              isItemFav={isItemFav}
-            />
-          }
-        />
+          <Route
+            path="/searh-result"
+            element={
+              <SearchResults
+                resultArr={resultArr}
+                loading={loading}
+                onClickFav={onClickFav}
+                isItemFav={isItemFav}
+              />
+            }
+          />
 
-        <Route
-          path="all-products"
-          element={
-            <AllProducts
-              products={products}
-              onClickFav={onClickFav}
-              loading={loading}
-              isItemFav={isItemFav}
-            />
-          }
-        />
-      </Routes>
+          <Route
+            path="all-products"
+            element={
+              <AllProducts
+                products={products}
+                onClickFav={onClickFav}
+                loading={loading}
+                isItemFav={isItemFav}
+              />
+            }
+          />
+        </Routes>
+      </div>
     </>
   );
 }
