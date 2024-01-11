@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { RightArrow } from "../DynamicIcons";
+import { useNavigate } from "react-router";
 
 export default function HeroSection() {
+  const navigate = useNavigate();
+
   const swiperImgUrls = [
     "Images/heroBanner1.png",
     "Images/heroBanner2.png",
@@ -28,23 +31,37 @@ export default function HeroSection() {
   }
 
   return (
-    <div className="w-full h-[66vh] relative">
+    <div
+      className="w-full h-[66vh] relative"
+      onClick={() => navigate("/all-products")}
+    >
       <img
         src={swiperImgUrls[currentImgIndex]}
         alt=""
         className="w-full h-full object-cover object-top"
       />
       <div className="absolute top-1/2 left-0 right-0 flex px-3">
-        <button className="rounded-md p-3" onClick={setPreviousImg}>
+        <button
+          className="rounded-md p-3"
+          onClick={(e) => {
+            e.stopPropagation();
+            setPreviousImg();
+          }}
+        >
           <span>
             <RightArrow classIcon={"rotate-180"} />
           </span>
         </button>
-        <button className="rounded-md p-3 ms-auto" onClick={setNextImg}>
+        <button
+          className="rounded-md p-3 ms-auto"
+          onClick={(e) => {
+            e.stopPropagation();
+            setNextImg();
+          }}
+        >
           <RightArrow />
         </button>
       </div>
     </div>
   );
 }
-
