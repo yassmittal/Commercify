@@ -10,6 +10,7 @@ import SelectDeliveryAddress from "./components/cart/selectDeliveryAddress";
 import FavoriteProducts from "./components/favorite";
 import Header from "./components/header";
 import SearchResults from "./components/header/searchResults";
+import AllProducts from "./components/allProducts";
 
 function App() {
   const [user, setUser] = useState();
@@ -303,6 +304,18 @@ function App() {
               resultArr={resultArr}
               loading={loading}
               onClickFav={onClickFav}
+              isItemFav={isItemFav}
+            />
+          }
+        />
+
+        <Route
+          path="all-products"
+          element={
+            <AllProducts
+              products={products}
+              onClickFav={onClickFav}
+              loading={loading}
               isItemFav={isItemFav}
             />
           }
