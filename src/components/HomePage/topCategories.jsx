@@ -27,26 +27,24 @@ export default function TopCategories() {
 
   return (
     <div className="p-4">
-      <h2 className="text-4xl text-center font-semibold mb-5">
+      <h2 className="md:text-4xl text-2xl text-center font-semibold mb-5">
         Top Categories
       </h2>
-      <div className="px-4">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {loading ? (
-            // Render skeleton loading placeholders while data is being fetched
-            <TopCategoriesPlaceholder />
-          ) : (
-            // Render the actual product list once data is fetched
-            <>
-              {favouriteProducts.map((product, index) => {
-                return (
-                  // eslint-disable-next-line react/jsx-key
-                  <CategoryCard categoryCardTitle={product} key={index} />
-                );
-              })}
-            </>
-          )}
-        </div>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {loading ? (
+          // Render skeleton loading placeholders while data is being fetched
+          <TopCategoriesPlaceholder />
+        ) : (
+          // Render the actual product list once data is fetched
+          <>
+            {favouriteProducts.map((product, index) => {
+              return (
+                // eslint-disable-next-line react/jsx-key
+                <CategoryCard categoryCardTitle={product} key={index} />
+              );
+            })}
+          </>
+        )}
       </div>
     </div>
   );
@@ -57,7 +55,7 @@ function CategoryCard({ categoryCardTitle }) {
   const navigate = useNavigate();
   return (
     <li
-      className="border border-gray-300 rounded-lg py-5 px-4 text-center cursor-pointer hover:border-transparent hover:-translate-y-1 hover:shadow-md transition-all list-none"
+      className="border border-gray-300 text-sm md:text-base rounded-lg py-5 px-4 text-center cursor-pointer hover:border-transparent hover:-translate-y-1 hover:shadow-md transition-all list-none"
       onClick={() => {
         navigate(`/${categoryCardTitle}`);
         window.scroll({ top: 0, behavior: "smooth" });

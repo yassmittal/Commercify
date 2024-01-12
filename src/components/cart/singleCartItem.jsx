@@ -33,10 +33,12 @@ export default function SingleCartItem({
     >
       <div className="border border-gray-400 rounded-sm p-4 flex items-center justify-evenly gap-3">
         <div className="h-full w-32">
-          <img src={cartItemImg} alt="" className="max-w-full" />
+          <img src={cartItemImg} alt="" className="w-full" />
         </div>
         <div>
-          <h3 className="text-2xl font-semibold mb-1">{cartItemTitle}</h3>
+          <h3 className="md:text-2xl text-base leading-snug font-semibold mb-1">
+            {cartItemTitle}
+          </h3>
           <p className="text-gray-500 text-xs">
             <span>Size: </span>
             <span className="font-medium">XS</span>
