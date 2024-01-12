@@ -11,7 +11,9 @@ export default function Cart({
 }) {
   return (
     <div className="p-5 max-w-[700px] mx-auto">
-      <h2 className="font-semibold text-4xl text-center mb-4">Cart Summary</h2>
+      <h2 className="font-semibold md:text-4xl text-xl text-center mb-4">
+        Cart Summary
+      </h2>
       <div>
         <ul className="flex flex-col gap-2">
           {cartItems.map((cartItem) => {

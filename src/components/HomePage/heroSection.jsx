@@ -32,15 +32,15 @@ export default function HeroSection() {
 
   return (
     <div
-      className="w-full h-[66vh] relative"
+      className="w-full h-[30vw] relative"
       onClick={() => navigate("/all-products")}
     >
       <img
         src={swiperImgUrls[currentImgIndex]}
         alt=""
-        className="w-full h-full object-cover object-top"
+        className="w-full h-full object-cover object-center"
       />
-      <div className="absolute top-1/2 left-0 right-0 flex px-3">
+      <div className="absolute top-1/2 left-0 right-0 flex px-3 -translate-y-1/2">
         <button
           className="rounded-md p-3"
           onClick={(e) => {

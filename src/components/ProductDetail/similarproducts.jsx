@@ -37,7 +37,7 @@ export default function Similarproducts({
   return (
     <div className="md:px-5 px-2">
       <h2 className="font-semibold text-2xl">Similar Products</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mx-auto p-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-12 mx-auto p-4">
         {loading ? (
           <TrendingProductsPlaceholder />
         ) : (

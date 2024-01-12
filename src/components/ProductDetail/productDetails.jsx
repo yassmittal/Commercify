@@ -30,7 +30,7 @@ export default function ProductDetails({
           <div className="p-6">
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-6 gap-4">
-                <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 min-h-[400px] h-full relative">
+                <div className="border rounded-sm border-gray-400 shadow-md p-4 col-span-6 sm:col-span-2 md:min-h-[400px] max-h-[400px]  h-full relative">
                   <img
                     src={productImg}
                     alt=""
