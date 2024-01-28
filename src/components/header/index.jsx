@@ -59,7 +59,10 @@ export default function Header({
                       }}
                       className="px-3 py-2 cursor-pointer block"
                       key={item.id}
-                      onClick={() => showResult(resultArr)}
+                      onClick={() => {
+                        setSearching(false);
+                        showResult(resultArr);
+                      }}
                     >
                       {item.title}
                     </Link>
